@@ -1,7 +1,6 @@
 package storages
 
 import (
-	"fmt"
 	"log"
 	"os"
 )
@@ -27,12 +26,4 @@ func NewLogStorage(path string) *LogStorage {
 	}
 
 	return storage
-}
-
-func (storage *LogStorage) WriteLog(input string) {
-	res, err := storage.Storage.WriteString(input)
-	if err != nil {
-		log.Fatalln("failed to write into file:", err)
-	}
-	fmt.Fprintf(os.Stdout, "write %d bytes\n", res)
 }
