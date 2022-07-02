@@ -45,13 +45,15 @@ func (server *AppServer) Serve() {
 }
 
 func (server *AppServer) Shutdown() {
-	log.Println("server stopped")
-
+	var err error
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	server.storage.Storage.Close()
 	defer cancel()
 
-	var err error
+	log.Println("server stopped")
+	if err = server.storage.Storage.Close(); err != nil {
+		log.Fatalln(err)
+	}
+
 	if err = server.srv.Shutdown(ctx); err != nil {
 		log.Fatalln("failed to shutdown gracefully:", err)
 	}

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"golang-log-server/internals/app/models"
 	"golang-log-server/internals/app/storages"
-	"os"
 )
 
 type LogProcessor struct {
@@ -17,13 +16,11 @@ func NewLogProcessor(storage *storages.LogStorage) *LogProcessor {
 
 func (processor *LogProcessor) WriteLog(log *models.Log) error {
 	file := processor.storage.Storage
-	input := []byte(fmt.Sprintf("%v\n", log.Log))
-	res, err := file.Write(input)
-	if err != nil {
+	if _, err := file.Write([]byte(fmt.Sprintf("%v\n", log.Log))); err != nil {
+		file.Close()
 		return err
 	}
 
-	fmt.Fprintf(os.Stdout, "write %d bytes\n", res)
 	file.Sync()
 	return nil
 }
