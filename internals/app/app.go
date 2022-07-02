@@ -14,12 +14,12 @@ import (
 )
 
 type AppServer struct {
-	config  cfg.Config
+	config  *cfg.Config
 	storage *storages.LogStorage
 	srv     *http.Server
 }
 
-func NewAppServer(cfg cfg.Config) *AppServer {
+func NewAppServer(cfg *cfg.Config) *AppServer {
 	return &AppServer{config: cfg}
 }
 
