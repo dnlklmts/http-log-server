@@ -1,5 +1,5 @@
 package models
 
 type Log struct {
-	Log string
+	Log string `json:"log"`
 }
