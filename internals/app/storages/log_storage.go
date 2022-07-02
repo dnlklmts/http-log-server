@@ -13,14 +13,7 @@ func NewLogStorage(path string) *LogStorage {
 	storage := new(LogStorage)
 	var err error
 
-	if !fileExists(path) {
-		storage.Storage, err = os.Create(path)
-		if err != nil {
-			log.Fatalln("failed to create file:", err)
-		}
-	}
-
-	storage.Storage, err = os.Open(path)
+	storage.Storage, err = os.OpenFile(path, os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		log.Fatalln("failed to open file:", err)
 	}
