@@ -32,7 +32,7 @@ func (handler *LogHandler) WriteLog(wrt http.ResponseWriter, req *http.Request) 
 
 	answer := map[string]interface{}{
 		"result": "OK",
-		"data":   struct{}{},
+		"data":   "",
 	}
 	RespOK(wrt, answer)
 }

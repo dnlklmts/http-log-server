@@ -28,6 +28,6 @@ func RespOK(wrt http.ResponseWriter, data map[string]interface{}) {
 	resp, _ := json.Marshal(data)
 	wrt.Header().Set("Content-Type", "application/json; charset=utf-8")
 	wrt.WriteHeader(http.StatusOK)
-	fmt.Fprintln(wrt, resp)
+	fmt.Fprintln(wrt, string(resp))
 
 }
