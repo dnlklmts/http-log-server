@@ -3,6 +3,7 @@ package cfg
 import "os"
 
 type Config struct {
+	Port         string
 	DefaultPath  string
 	ProvidedPath string
 }
